@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header(props) {
   const navlinks = [
-    { link: "/", name: "Test Page" },
+    { link: "/", name: "SKU Generator" },
     { link: "/test-page-2", name: "Test Page 2" },
   ];
 
