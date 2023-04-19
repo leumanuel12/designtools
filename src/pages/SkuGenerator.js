@@ -49,7 +49,8 @@ export default function SkuGenerator() {
     let finalProducts = [];
     const variantList = tempVariants && tempVariants.split(",");
 
-    /*
+    //PENDING
+    /* 
     if (productName && tempVariants) {
       for (let y = 1; y <= variantList.length; y++) {
         if (variantList[y] != undefined) {
@@ -91,7 +92,10 @@ export default function SkuGenerator() {
         </div>
         <div className="my-2">
           <label for="product-count" className="w-80">
-            # of Products
+            Total # of Products{" "}
+            <span className="text-sm italic text-red-700">
+              (products X variants)
+            </span>
           </label>
           <input
             type="text"
