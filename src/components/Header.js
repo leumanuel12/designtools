@@ -7,7 +7,7 @@ export default function Header(props) {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-100">
       <div className="bg-gradient-to-r from-orange-500 from-50% to-orange-700 to-90% py-5 text-white">
         <div className="max-w-7xl px-5 mx-auto text-2xl font-medium">
           Design Tools{" "}
@@ -16,9 +16,10 @@ export default function Header(props) {
           </span>
         </div>
       </div>
+
       <div className="max-w-7xl mx-auto bg-white min-h-screen">
-        <div className="mx-5 py-3 px-5 mb-2">
-          <div className="pt-3 px-5 text-sm">
+        <div className="py-3 px-5 mb-2">
+          <div className="pt-3 text-sm">
             {navlinks &&
               navlinks.map((x) => {
                 return (
@@ -39,7 +40,7 @@ export default function Header(props) {
               })}
           </div>
         </div>
-        <div className="mx-auto p-3 max-w-6xl border border-orange-300 rounded-md">
+        <div className="m-4 p-3 border border-orange-300 rounded-md">
           {props.children}
         </div>
       </div>
