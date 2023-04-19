@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
-import Test from "./components/Test";
+import SkuGenerator from "./pages/SkuGenerator";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Header>
           <Routes>
-            <Route path="/" element={<Test />} />
+            <Route path="/" element={<SkuGenerator />} />
           </Routes>
         </Header>
       </BrowserRouter>
