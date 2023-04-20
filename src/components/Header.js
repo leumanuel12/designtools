@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function Header(props) {
   const navlinks = [
-    { link: "/", name: "SKU Generator" },
-    { link: "/blank", name: "Blank" },
+    { key: 0, link: "/", name: "SKU Generator" },
+    { key: 1, link: "/blank", name: "Blank" },
   ];
 
   return (
@@ -26,6 +26,7 @@ export default function Header(props) {
                 return (
                   <NavLink
                     to={x.link}
+                    key={x.key}
                     className={({ isActive }) => {
                       return (
                         "px-3 py-2 font-medium " +
