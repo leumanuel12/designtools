@@ -8,6 +8,11 @@ export default function SkuGenerator() {
   const [tempVariantsList, setTempVariantsList] = useState([]);
   const [checked, setChecked] = useState([]);
 
+  //Variants max 3
+  const [variants1, setVariants1] = useState([]);
+  const [variants2, setVariants2] = useState([]);
+  const [variants3, setVariants3] = useState([]);
+
   //zero pad the current number
   function paddedSkuNumber(currentNum) {
     const skuLength = 4 - String(currentNum).length;
@@ -80,11 +85,15 @@ export default function SkuGenerator() {
       if (variants[x]) {
         const mainVariants = variants[x];
         //console.log("main variants: ", mainVariants);
-        console.log(variants[0]);
-        console.log(variants[1]);
-        console.log(variants[2]);
+        if (variants[0]) setVariants1(variants[0]);
+        if (variants[1]) setVariants2(variants[1]);
+        if (variants[2]) setVariants3(variants[2]);
       }
     }
+
+    if (variants1) console.log("variants 1: ", variants1);
+    if (variants2) console.log("variants 2: ", variants2);
+    if (variants3) console.log("variants 3: ", variants3);
 
     /*for (let x = 0; x <= variants.length; x++) {
       if (variants[x]) {
