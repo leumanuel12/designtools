@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function SkuGenerator() {
   const [productName, setProductName] = useState();
-  const [tempSkuNumber, setTempSkuNumber] = useState();
   const [finalSKU, setFinalSKU] = useState();
   const [tempVariants, setTempVariants] = useState();
-  const [finalProductName, setFinalProductName] = useState();
+  const [tempVariantsList, setTempVariantsList] = useState([]);
   const [checked, setChecked] = useState([]);
-  const [reset, setReset] = useState(false);
 
   //zero pad the current number
   function paddedSkuNumber(currentNum) {
@@ -66,29 +64,41 @@ export default function SkuGenerator() {
     }
   }
 
+  //Add Variants
+  function addVariants() {
+    return true;
+  }
+
+  //Generate SKU Details
   function generateDetails() {
     let listSKU = [];
-    let finalProducts = [];
 
-    if (tempSkuNumber && productName && tempVariants) {
-      for (let x = 1; x <= tempSkuNumber; x++) {
-        //set final SKU code
-        listSKU.push([
-          String(x),
-          generateSkuInitials() + paddedSkuNumber(x) + x,
-        ]);
+    if (productName && tempVariants) {
+      let variants = tempVariants.split(",");
+
+      //set final SKU details
+
+      for (let x = 0; x <= variants.length; x++) {
+        if (variants[x]) {
+          listSKU.push([
+            String(x),
+            generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
+            productName + " " + variants[x],
+          ]);
+        }
       }
     }
     setFinalSKU(listSKU);
   }
 
+  if (finalSKU) console.log(finalSKU);
+
   //RESET BUTTON
   function resetFields() {
-    setReset(true);
     setProductName("");
-    setTempSkuNumber("");
     setFinalSKU([]);
     setTempVariants("");
+    setTempVariantsList([]);
   }
 
   return (
@@ -101,20 +111,14 @@ export default function SkuGenerator() {
       >
         <ArrowPathIcon className="h-8 w-8 text-red-500 hover:bg-red-500 hover:text-white rounded-3xl p-1 border-red-500 border-2" />
       </button>
-      <form
-        className="pb-3"
-        onSubmit={(e) => {
-          e.preventDefault();
-          generateDetails();
-        }}
-      >
-        <div className="my-2 md:grid grid-cols-2 w-6/12 px-5">
-          <div className="cols-span-1">
+      <form className="pb-3">
+        <div className="lg:grid grid-cols-3 w-7/12 px-5 py-2">
+          <div className="cols-span-1 px-1 py-1">
             <label for="product-name" className="font-medium">
               Product Name
             </label>
           </div>
-          <div className="cols-span-1">
+          <div className="cols-span-1 px-1 py-1">
             <input
               type="text"
               name="product-name"
@@ -127,57 +131,75 @@ export default function SkuGenerator() {
               }}
             />
           </div>
+          <div className="cols-span-1 px-1 py-1" />
         </div>
 
-        <div className="my-2 md:grid grid-cols-2 w-6/12 px-5">
-          <div className="cols-span-1">
-            <label for="product-count" className="font-medium">
-              Total # of Products{" "}
+        <div className="lg:grid grid-cols-3 w-7/12 px-5 py-2">
+          <div className="cols-span-1 px-1 py-1">
+            <label for="product-variants" className="font-medium">
+              Variants{" "}
               <span className="text-sm italic text-orange-500">
-                (products X variants)
+                (separated by comma)
               </span>
             </label>
           </div>
-          <div className="cols-span-1">
+          <div className="cols-span-1 px-1 py-1">
             <input
-              type="number"
-              name="product-count"
-              size="4"
-              maxlength="3"
+              type="text"
+              name="product-variants"
+              className="px-3 border border-orange-300 rounded-md w-full"
+              placeholder="e.g. small, medium, large"
+              value={tempVariants}
               required
-              value={tempSkuNumber}
-              className="px-3 border border-orange-300 rounded-md"
-              onChange={(e) => setTempSkuNumber(e.target.value)}
+              onChange={(e) => {
+                setTempVariants(e.target.value);
+              }}
             />
+          </div>
+          <div className="cols-span-1 px-1 py-1">
+            <button
+              className="border bg-orange-100 border-orange-500 hover:bg-orange-500 hover:text-white w-28 text-orange-500 rounded-md"
+              onClick={(e) => {
+                e.preventDefault();
+                if (tempVariants) {
+                  const temps = [...tempVariantsList];
+                  setTempVariantsList([...temps, tempVariants.split(",")]);
+                  setTempVariants("");
+                }
+              }}
+            >
+              Add Variants
+            </button>
           </div>
         </div>
 
-        <div className="my-2 md:grid grid-cols-2 w-6/12 px-5">
-          <label for="product-variants" className="font-medium">
-            Variants{" "}
-            <span className="text-sm italic text-orange-500">
-              (separated by comma)
+        {tempVariantsList ? (
+          <div className="my-3 mx-10 p-4 text-sm border border-gray-300 shadow-md rounded-md">
+            <span className="text-orange-500 italic font-medium">
+              Variants added :
             </span>
-          </label>
-          <input
-            type="text"
-            name="product-variants"
-            className="px-3 border border-orange-300 rounded-md"
-            placeholder="e.g. small, medium, large"
-            value={tempVariants}
-            required
-            onChange={(e) => {
-              setTempVariants(e.target.value);
-            }}
-          />
-        </div>
-
-        <input
-          type="submit"
-          value="Generate"
-          className="mx-5 my-3 px-2 py-1  rounded-sm text-white bg-orange-500 hover:bg-orange-600"
-        />
+            {tempVariantsList.map((varlist) => {
+              return (
+                <span className="bg-orange-200 px-2 py-1 mx-1 my-3 font-medium">
+                  {varlist.join(", ")}
+                </span>
+              );
+            })}
+          </div>
+        ) : (
+          <span>List is empty</span>
+        )}
       </form>
+
+      <button
+        className="mx-5 my-3 px-2 py-1  rounded-sm text-white bg-orange-500 hover:bg-orange-600"
+        onClick={(e) => {
+          e.preventDefault();
+          generateDetails();
+        }}
+      >
+        Generate
+      </button>
 
       <div className="p-2">
         <div className="py-3 italic font-medium text-orange-500 border-t-2 border-red-500">
@@ -208,6 +230,8 @@ export default function SkuGenerator() {
                   }}
                 />{" "}
                 {sku[1]}
+                <span className="px-2" />
+                {sku[2]}
               </div>
             );
           })}
