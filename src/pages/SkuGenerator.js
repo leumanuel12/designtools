@@ -72,13 +72,23 @@ export default function SkuGenerator() {
   //Generate SKU Details
   function generateDetails() {
     let listSKU = [];
+    let variants = tempVariantsList;
+    console.log(variants);
 
-    if (productName && tempVariants) {
-      let variants = tempVariants.split(",");
+    for (let x = 0; x <= variants.length; x++) {
+      if (variants[x]) {
+        const subvariant = variants[x];
+        for (let y = 0; y <= subvariant.length; y++) {
+          listSKU.push([
+            String(x),
+            generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
+            productName + " " + subvariant + " " + subvariant[y],
+          ]);
+        }
+      }
+    }
 
-      //set final SKU details
-
-      for (let x = 0; x <= variants.length; x++) {
+    /*for (let x = 0; x <= variants.length; x++) {
         if (variants[x]) {
           listSKU.push([
             String(x),
@@ -86,12 +96,10 @@ export default function SkuGenerator() {
             productName + " " + variants[x],
           ]);
         }
-      }
-    }
+      }*/
+
     setFinalSKU(listSKU);
   }
-
-  if (finalSKU) console.log(finalSKU);
 
   //RESET BUTTON
   function resetFields() {
@@ -173,21 +181,25 @@ export default function SkuGenerator() {
           </div>
         </div>
 
-        {tempVariantsList ? (
+        {tempVariantsList && (
           <div className="my-3 mx-10 p-4 text-sm border border-gray-300 shadow-md rounded-md">
             <span className="text-orange-500 italic font-medium">
               Variants added :
             </span>
-            {tempVariantsList.map((varlist) => {
-              return (
-                <span className="bg-orange-200 px-2 py-1 mx-1 my-3 font-medium">
-                  {varlist.join(", ")}
-                </span>
-              );
-            })}
+            {tempVariantsList.length > 0 ? (
+              tempVariantsList.map((varlist) => {
+                return (
+                  <span className="bg-orange-200 px-2 py-1 mx-1 my-3 font-medium">
+                    {varlist.join(", ")}
+                  </span>
+                );
+              })
+            ) : (
+              <span className="px-2 py-1 mx-1 my-3 font-medium italic text-red-600">
+                ( List is empty. )
+              </span>
+            )}
           </div>
-        ) : (
-          <span>List is empty</span>
         )}
       </form>
 
@@ -202,7 +214,7 @@ export default function SkuGenerator() {
       </button>
 
       <div className="p-2">
-        <div className="py-3 italic font-medium text-orange-500 border-t-2 border-red-500">
+        <div className="py-3 italic font-medium text-orange-500 border-t border-orange-500">
           Tip : Tick the box once done for easy tracking.
         </div>
 
