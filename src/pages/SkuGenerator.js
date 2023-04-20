@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function SkuGenerator() {
@@ -70,11 +70,6 @@ export default function SkuGenerator() {
 
       return tempJoinSku;
     }
-  }
-
-  //Add Variants
-  function addVariants() {
-    return true;
   }
 
   //Generate SKU Details
@@ -174,6 +169,10 @@ export default function SkuGenerator() {
     setAllProductVariants([]);
     setChecked([]);
   }
+
+  useEffect(() => {
+    generateDetails();
+  }, [allProductVariants]);
 
   return (
     <>
@@ -276,8 +275,8 @@ export default function SkuGenerator() {
       <button
         className="mx-5 my-3 px-2 py-1  rounded-sm text-white bg-orange-500 hover:bg-orange-600"
         onClick={(e) => {
-          e.preventDefault();
           generateDetails();
+          e.preventDefault();
         }}
       >
         Generate
