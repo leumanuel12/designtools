@@ -11,13 +11,14 @@ export default function Header(props) {
       <div className="bg-gradient-to-r from-orange-500 from-50% to-orange-700 to-90% py-5 text-white fixed w-full">
         <div className="max-w-7xl px-5 mx-auto text-2xl font-medium">
           Design Tools{" "}
-          <span className="text-xs italic font-medium text-orange-800">
-            by MJ
-          </span>
+          <span className="text-xs italic font-medium text-orange-800">MJ</span>
         </div>
       </div>
 
-      <div className="pt-20 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
+      <div className="pt-16 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
+        <div className="flex mx-auto justify-center bg-orange-100 text-gray-600 w-full pt-2">
+          This tool is still under development !
+        </div>
         <div className="py-3 px-5 mb-2">
           <div className="pt-3 text-base">
             {navlinks &&

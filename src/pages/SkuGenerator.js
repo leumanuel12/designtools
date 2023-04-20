@@ -180,11 +180,10 @@ export default function SkuGenerator() {
       </form>
 
       <div className="p-2">
-        {finalSKU && (
-          <div className="py-3 italic font-medium text-orange-500 border-t-2 border-red-500">
-            Tip : Tick the box once done for easy tracking.
-          </div>
-        )}
+        <div className="py-3 italic font-medium text-orange-500 border-t-2 border-red-500">
+          Tip : Tick the box once done for easy tracking.
+        </div>
+
         {finalSKU &&
           finalSKU.map((sku) => {
             return (
