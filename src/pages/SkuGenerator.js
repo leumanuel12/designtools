@@ -120,6 +120,7 @@ export default function SkuGenerator() {
               name="product-name"
               className="px-3 border border-orange-300 rounded-md sm:w-72"
               placeholder="e.g. 50 in 1 Instant Coffee"
+              required
               value={productName}
               onChange={(e) => {
                 setProductName(e.target.value);
@@ -143,6 +144,7 @@ export default function SkuGenerator() {
               name="product-count"
               size="4"
               maxlength="3"
+              required
               value={tempSkuNumber}
               className="px-3 border border-orange-300 rounded-md"
               onChange={(e) => setTempSkuNumber(e.target.value)}
@@ -163,6 +165,7 @@ export default function SkuGenerator() {
             className="px-3 border border-orange-300 rounded-md"
             placeholder="e.g. small, medium, large"
             value={tempVariants}
+            required
             onChange={(e) => {
               setTempVariants(e.target.value);
             }}
@@ -179,7 +182,7 @@ export default function SkuGenerator() {
       <div className="p-2">
         {finalSKU && (
           <div className="py-3 italic font-medium text-orange-500 border-t-2 border-red-500">
-            Tick the box once done copying for easy tracking.
+            Tip : Tick the box once done for easy tracking.
           </div>
         )}
         {finalSKU &&

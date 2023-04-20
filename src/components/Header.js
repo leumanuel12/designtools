@@ -7,8 +7,8 @@ export default function Header(props) {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="bg-gradient-to-r from-orange-500 from-50% to-orange-700 to-90% py-5 text-white">
+    <div className="min-h-screen bg-gray-200">
+      <div className="bg-gradient-to-r from-orange-500 from-50% to-orange-700 to-90% py-5 text-white fixed w-full">
         <div className="max-w-7xl px-5 mx-auto text-2xl font-medium">
           Design Tools{" "}
           <span className="text-xs italic font-medium text-orange-800">
@@ -17,9 +17,9 @@ export default function Header(props) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto bg-white min-h-screen">
+      <div className="pt-20 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
         <div className="py-3 px-5 mb-2">
-          <div className="pt-3 text-sm">
+          <div className="pt-3 text-base">
             {navlinks &&
               navlinks.map((x) => {
                 return (
@@ -40,7 +40,7 @@ export default function Header(props) {
               })}
           </div>
         </div>
-        <div className="m-4 p-3 border border-orange-300 rounded-md">
+        <div className="m-4 p-3 border border-gray-300 rounded-md shadow-md">
           {props.children}
         </div>
       </div>
