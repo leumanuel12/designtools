@@ -13,6 +13,9 @@ export default function SkuGenerator() {
   const [variants2, setVariants2] = useState([]);
   const [variants3, setVariants3] = useState([]);
 
+  //All Product Variants
+  const [allProductVariants, setAllProductVariants] = useState([]);
+
   //zero pad the current number
   function paddedSkuNumber(currentNum) {
     const skuLength = 4 - String(currentNum).length;
@@ -20,7 +23,7 @@ export default function SkuGenerator() {
 
     //console.log("size: ", skuLength);
 
-    for (let x = 1; x <= skuLength; x++) {
+    for (let x = 0; x <= skuLength; x++) {
       padString = padString + "0";
     }
 
@@ -38,7 +41,7 @@ export default function SkuGenerator() {
     } else {
       setChecked(
         checked.filter((items) => {
-          return items != "check-" + item;
+          return items !== "check-" + item;
         })
       );
     }
@@ -77,42 +80,84 @@ export default function SkuGenerator() {
   //Generate SKU Details
   function generateDetails() {
     let listSKU = [];
-    let listSKUtemp1 = [];
     let variants = tempVariantsList;
+    let tempAllProductVariants = [];
     //console.log(variants);
 
     for (let x = 0; x <= variants.length; x++) {
       if (variants[x]) {
-        const mainVariants = variants[x];
         //console.log("main variants: ", mainVariants);
-        if (variants[0]) setVariants1(variants[0]);
-        if (variants[1]) setVariants2(variants[1]);
-        if (variants[2]) setVariants3(variants[2]);
+        if (variants[0] !== undefined) setVariants1(variants[0]);
+        if (variants[1] !== undefined) setVariants2(variants[1]);
+        if (variants[2] !== undefined) setVariants3(variants[2]);
       }
     }
 
-    if (variants1) console.log("variants 1: ", variants1);
-    if (variants2) console.log("variants 2: ", variants2);
-    if (variants3) console.log("variants 3: ", variants3);
+    //if (variants1) console.log("variants 1: ", variants1);
+    //if (variants2) console.log("variants 2: ", variants2);
+    //if (variants3) console.log("variants 3: ", variants3);
 
-    /*for (let x = 0; x <= variants.length; x++) {
-      if (variants[x]) {
-        const subvariant = variants[x];
-        //console.log("main variants: ", subvariant);
+    //IF ONLY 1 VARIANT TYPE
+    if (variants.length === 1 && variants1) {
+      for (let x = 0; x <= variants1.length; x++) {
+        if (variants1[x] !== undefined) {
+          tempAllProductVariants.push(productName + " " + variants1[x]);
+        }
+      }
+    }
 
-        for (let y = 0; y <= subvariant.length; y++) {
-          if (subvariant[y]) {
-            console.log(subvariant[y]);
-            listSKUtemp1.push([
-              String(x),
-              generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
-              productName + " " + subvariant[y],
-            ]);
+    //IF 2 VARIANT TYPES
+    if (variants.length === 2 && variants1 && variants2) {
+      for (let x = 0; x <= variants1.length; x++) {
+        for (let y = 0; y <= variants2.length; y++) {
+          if (variants1[x] !== undefined && variants2[y] !== undefined) {
+            tempAllProductVariants.push(
+              productName + " " + variants1[x] + " " + variants2[y]
+            );
           }
         }
       }
-    }*/
-    //if (listSKUtemp1) console.log(listSKUtemp1);
+    }
+
+    //IF 3 VARIANT TYPES
+    if (variants.length === 3 && variants1 && variants2 && variants3) {
+      for (let x = 0; x <= variants1.length; x++) {
+        for (let y = 0; y <= variants2.length; y++) {
+          for (let z = 0; z <= variants3.length; z++) {
+            if (
+              variants1[x] !== undefined &&
+              variants2[y] !== undefined &&
+              variants3[z] !== undefined
+            ) {
+              tempAllProductVariants.push(
+                productName +
+                  " " +
+                  variants1[x] +
+                  " " +
+                  variants2[y] +
+                  " " +
+                  variants3[z]
+              );
+            }
+          }
+        }
+      }
+    }
+
+    //console.log(tempAllProductVariants);
+    setAllProductVariants(tempAllProductVariants);
+
+    if (tempAllProductVariants) {
+      for (let x = 0; x <= tempAllProductVariants.length; x++) {
+        if (tempAllProductVariants[x]) {
+          listSKU.push([
+            String(x),
+            generateSkuInitials() + paddedSkuNumber(x + 1) + (x + 1),
+            tempAllProductVariants[x],
+          ]);
+        }
+      }
+    }
 
     setFinalSKU(listSKU);
   }
@@ -123,6 +168,10 @@ export default function SkuGenerator() {
     setFinalSKU([]);
     setTempVariants("");
     setTempVariantsList([]);
+    setVariants1([]);
+    setVariants2([]);
+    setVariants3([]);
+    setAllProductVariants([]);
   }
 
   return (
