@@ -172,6 +172,7 @@ export default function SkuGenerator() {
     setVariants2([]);
     setVariants3([]);
     setAllProductVariants([]);
+    setChecked([]);
   }
 
   return (
@@ -235,9 +236,13 @@ export default function SkuGenerator() {
               onClick={(e) => {
                 e.preventDefault();
                 if (tempVariants) {
-                  const temps = [...tempVariantsList];
-                  setTempVariantsList([...temps, tempVariants.split(",")]);
-                  setTempVariants("");
+                  if (tempVariantsList.length > 2) {
+                    alert("Maximum variants count reached!");
+                  } else {
+                    const temps = [...tempVariantsList];
+                    setTempVariantsList([...temps, tempVariants.split(",")]);
+                    setTempVariants("");
+                  }
                 }
               }}
             >
@@ -282,7 +287,16 @@ export default function SkuGenerator() {
         <div className="py-3 italic font-medium text-orange-500 border-t border-orange-500">
           Tip : Tick the box once done for easy tracking.
         </div>
-
+        {allProductVariants.length > 0 ? (
+          <div className="text-green-600 font-medium py-2">
+            <span className="font-bold text-lg">
+              {allProductVariants.length}
+            </span>{" "}
+            records generated !
+          </div>
+        ) : (
+          <div className="text-red-600 font-medium py-2">No records yet.</div>
+        )}
         {finalSKU &&
           finalSKU.map((sku) => {
             return (
