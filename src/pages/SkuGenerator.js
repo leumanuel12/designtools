@@ -72,31 +72,38 @@ export default function SkuGenerator() {
   //Generate SKU Details
   function generateDetails() {
     let listSKU = [];
+    let listSKUtemp1 = [];
     let variants = tempVariantsList;
-    console.log(variants);
+    //console.log(variants);
 
     for (let x = 0; x <= variants.length; x++) {
       if (variants[x]) {
-        const subvariant = variants[x];
-        for (let y = 0; y <= subvariant.length; y++) {
-          listSKU.push([
-            String(x),
-            generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
-            productName + " " + subvariant + " " + subvariant[y],
-          ]);
-        }
+        const mainVariants = variants[x];
+        //console.log("main variants: ", mainVariants);
+        console.log(variants[0]);
+        console.log(variants[1]);
+        console.log(variants[2]);
       }
     }
 
     /*for (let x = 0; x <= variants.length; x++) {
-        if (variants[x]) {
-          listSKU.push([
-            String(x),
-            generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
-            productName + " " + variants[x],
-          ]);
+      if (variants[x]) {
+        const subvariant = variants[x];
+        //console.log("main variants: ", subvariant);
+
+        for (let y = 0; y <= subvariant.length; y++) {
+          if (subvariant[y]) {
+            console.log(subvariant[y]);
+            listSKUtemp1.push([
+              String(x),
+              generateSkuInitials() + paddedSkuNumber(x) + (x + 1),
+              productName + " " + subvariant[y],
+            ]);
+          }
         }
-      }*/
+      }
+    }*/
+    //if (listSKUtemp1) console.log(listSKUtemp1);
 
     setFinalSKU(listSKU);
   }
