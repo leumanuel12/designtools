@@ -13,6 +13,10 @@ export default function SkuGenerator() {
   const [variants2, setVariants2] = useState([]);
   const [variants3, setVariants3] = useState([]);
 
+  //copy text to clipboard
+  const [copyText, setCopyText] = useState([]);
+  const [copyTextCode, setCopyTextCode] = useState([]);
+
   //All Product Variants
   const [allProductVariants, setAllProductVariants] = useState([]);
 
@@ -170,9 +174,16 @@ export default function SkuGenerator() {
     setChecked([]);
   }
 
-  useEffect(() => {
+  function copyToClipboard(code, text) {
+    navigator.clipboard.writeText(text);
+    setCopyTextCode([...copyTextCode, code + "-" + text]);
+    setCopyText([...copyText, text]);
+  }
+
+  /*useEffect(() => {
     generateDetails();
-  }, [allProductVariants]);
+  }, [allProductVariants]);*/
+  if (copyText) console.log("copied text:", copyText);
 
   return (
     <>
@@ -284,7 +295,8 @@ export default function SkuGenerator() {
 
       <div className="p-2">
         <div className="py-3 italic font-medium text-orange-500 border-t border-orange-500">
-          Tip : Tick the box once done for easy tracking.
+          Tip : Tick the box once done for easy tracking. Also clicking the text
+          generated will auto copy its content to clipboard.
         </div>
         {allProductVariants.length > 0 ? (
           <div className="text-green-600 font-medium py-2">
@@ -304,8 +316,7 @@ export default function SkuGenerator() {
                 className={
                   (checked.includes("check-" + sku[0])
                     ? "bg-green-200 text-green-600"
-                    : "") +
-                  " px-4 border-t border-orange-300 font-medium py-1 hover:bg-orange-100"
+                    : "") + " px-4 border-t border-orange-300 font-medium py-2"
                 }
               >
                 <input
@@ -319,9 +330,47 @@ export default function SkuGenerator() {
                     setCheckbox(e, sku[0]);
                   }}
                 />{" "}
-                {sku[1]}
+                <button
+                  className={
+                    (copyTextCode.includes(sku[0] + "-" + sku[1])
+                      ? "bg-green-200 text-green-600 "
+                      : "") +
+                    "border border-gray-400 px-2 rounded-md hover:bg-orange-200"
+                  }
+                  onClick={() => copyToClipboard(sku[0], sku[1])}
+                >
+                  {sku[1]}{" "}
+                  <span
+                    className={
+                      (copyTextCode.includes(sku[0] + "-" + sku[1])
+                        ? ""
+                        : "hidden ") + "text-green-500 font-bold"
+                    }
+                  >
+                    &#10003;
+                  </span>
+                </button>
                 <span className="px-2" />
-                {sku[2]}
+                <button
+                  className={
+                    (copyTextCode.includes(sku[0] + "-" + sku[2])
+                      ? "bg-green-200 text-green-600 "
+                      : "") +
+                    "border border-gray-400 px-2 rounded-md hover:bg-orange-200"
+                  }
+                  onClick={() => copyToClipboard(sku[0], sku[2])}
+                >
+                  {sku[2]}{" "}
+                  <span
+                    className={
+                      (copyTextCode.includes(sku[0] + "-" + sku[2])
+                        ? ""
+                        : "hidden ") + "text-green-500 font-bold"
+                    }
+                  >
+                    &#10003;
+                  </span>
+                </button>
               </div>
             );
           })}
