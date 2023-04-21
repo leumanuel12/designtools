@@ -172,6 +172,8 @@ export default function SkuGenerator() {
     setVariants3([]);
     setAllProductVariants([]);
     setChecked([]);
+    setCopyText([]);
+    setCopyTextCode([]);
   }
 
   function copyToClipboard(code, text) {
