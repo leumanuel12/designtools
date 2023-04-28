@@ -16,7 +16,7 @@ export default function Header(props) {
       </div>
 
       <div className="pt-16 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
-        <div className="flex mx-auto justify-center bg-orange-100 text-gray-600 w-full pt-2">
+        <div className="hidden mx-auto justify-center bg-orange-100 text-gray-600 w-full pt-2">
           This tool is still under development !
         </div>
         <div className="py-3 px-5 mb-2">
