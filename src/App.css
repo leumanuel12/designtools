@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .casetable th,
+  .casetable td {
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: #808080;
+    text-align: center;
+    font-weight: 500;
+    padding: 2px 40px;
+  }
+
+  .casetable th {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 115 22 / var(--tw-bg-opacity));
+    color: #fff;
+    font-size: 18px;
+  }
+
+  .input-styles {
+    padding-left: 0.75rem /* 12px */;
+    padding-right: 0.75rem /* 12px */;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(209 213 219 / var(--tw-border-opacity));
+    border-radius: 0.375rem /* 6px */;
+  }
+}
