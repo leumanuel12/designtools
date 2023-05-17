@@ -11,39 +11,35 @@ export default function CaseStatus() {
     {
       caseid: "F-0000",
       statuscode: 1,
-      status: "First Design Complete",
     },
     {
       caseid: "F-1111",
       statuscode: 12,
-      status: "Fullfillment Complete",
     },
     {
       caseid: "F-2222",
       statuscode: 5,
-      status: "3rd - QC Fix",
     },
     {
       caseid: "F-2323",
       statuscode: 6,
-      status: "3rd - QC Fix Complete",
     },
     {
       caseid: "F-3333",
       statuscode: 7,
-      status: "4th - QC Fix",
     },
     {
       caseid: "F-4444",
       statuscode: 9,
-      status: "5th - QC Fix",
     },
     {
       caseid: "F-5555",
       statuscode: 11,
-      status: "Redesign",
     },
   ];
+
+  //mongodb+srv://cantiveros12:u5qwAI5tioNxbU19@casestatus.2cyqjhs.mongodb.net/
+  //https://www.geeksforgeeks.org/how-to-connect-mongodb-with-reactjs/
 
   function setStatusColor(statuscode) {
     if (!statuscode) return "";
@@ -52,6 +48,23 @@ export default function CaseStatus() {
     if (statuscode === 9) return " bg-red-400 ";
     if (statuscode === 11) return " bg-black text-white ";
     if (statuscode === 12) return " bg-green-300 ";
+  }
+
+  function setStatusMessage(statuscode) {
+    if (!statuscode) return "";
+    if (statuscode === 0) return "First Design Complete";
+    if (statuscode === 1) return "1st - Design Fix";
+    if (statuscode === 2) return "1st - QC Fix Complete";
+    if (statuscode === 3) return "2nd - Design Fix";
+    if (statuscode === 4) return "2nd - QC Fix Complete";
+    if (statuscode === 5) return "3rd - Design Fix";
+    if (statuscode === 6) return "3rd - QC Fix Complete";
+    if (statuscode === 7) return "4th - Design Fix";
+    if (statuscode === 8) return "4th - QC Fix Complete";
+    if (statuscode === 9) return "5th - Design Fix";
+    if (statuscode === 10) return "5th - QC Fix Complete";
+    if (statuscode === 11) return "Redesign";
+    if (statuscode === 12) return "Fullfillment Complete";
   }
 
   return (
@@ -71,7 +84,9 @@ export default function CaseStatus() {
                 return (
                   <tr key={x.caseid}>
                     <td>{x.caseid}</td>
-                    <td className={setStatusColor(x.statuscode)}>{x.status}</td>
+                    <td className={setStatusColor(x.statuscode)}>
+                      {setStatusMessage(x.statuscode)}
+                    </td>
                     <td>
                       <div className="sm:flex justify-center max-md:px-4">
                         <PencilSquareIcon className="h-5 w-5 hover:stroke-blue-600" />
