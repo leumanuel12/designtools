@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowPathIcon } from "@heroicons/react/20/solid";
 
 export default function SkuGenerator() {
@@ -190,7 +190,7 @@ export default function SkuGenerator() {
   return (
     <>
       <button
-        className="md:float-right"
+        className="md:float-right mt-4"
         onClick={() => {
           resetFields();
         }}
@@ -208,7 +208,7 @@ export default function SkuGenerator() {
             <input
               type="text"
               name="product-name"
-              className="px-3 border border-orange-300 rounded-md sm:w-72"
+              className="px-3 border border-gray-300 rounded-md sm:w-72"
               placeholder="e.g. 50 in 1 Instant Coffee"
               required
               value={productName}
@@ -233,7 +233,7 @@ export default function SkuGenerator() {
             <input
               type="text"
               name="product-variants"
-              className="px-3 border border-orange-300 rounded-md w-full"
+              className="px-3 border border-gray-300 rounded-md w-full"
               placeholder="e.g. small, medium, large"
               value={tempVariants}
               required

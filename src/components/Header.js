@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function Header(props) {
   const navlinks = [
-    { key: 0, link: "/", name: "SKU Generator" },
-    { key: 1, link: "/casestatus", name: "Case Status" },
+    { key: 0, link: "/", name: "Case Status Tracker" },
+    { key: 1, link: "/sku-generator", name: "SKU Generator" },
   ];
 
   return (
@@ -15,10 +15,7 @@ export default function Header(props) {
         </div>
       </div>
 
-      <div className="pt-16 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
-        <div className="hidden mx-auto justify-center bg-orange-100 text-gray-600 w-full pt-2">
-          This tool is still under development !
-        </div>
+      <div className="pt-20 pb-5 max-w-7xl mx-auto bg-white min-h-screen shadow-lg">
         <div className="py-3 px-5 mb-2">
           <div className="pt-3 text-base">
             {navlinks &&
@@ -29,7 +26,7 @@ export default function Header(props) {
                     key={x.key}
                     className={({ isActive }) => {
                       return (
-                        "px-3 py-2 font-medium " +
+                        "px-3 py-2 font-medium max-md:flex " +
                         (isActive
                           ? "text-white bg-orange-500 rounded-sm"
                           : "hover:bg-orange-300")
@@ -42,7 +39,8 @@ export default function Header(props) {
               })}
           </div>
         </div>
-        <div className="m-4 p-3 border border-gray-300 rounded-md shadow-md">
+        <div className="mx-4 p-3 rounded-md">
+          <div className="w-full border-b border-orange-500" />
           {props.children}
         </div>
       </div>

@@ -10,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Header>
           <Routes>
-            <Route path="/" element={<SkuGenerator />} />
-            <Route path="/casestatus" element={<CaseStatus />} />
+            <Route path="/" element={<CaseStatus />} />
+            <Route path="/sku-generator" element={<SkuGenerator />} />
           </Routes>
         </Header>
       </BrowserRouter>
