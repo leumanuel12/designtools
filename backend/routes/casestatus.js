@@ -5,7 +5,7 @@ let CaseStatus = require("../models/casestatus.models");
 router.route("/").get((req, res) => {
   CaseStatus.find()
     .then((users) => res.json(users))
-    .catch((e) => res.status(400).json("Error Message: ", e));
+    .catch((e) => res.status(400).json("Error Message: " + e));
 });
 
 //POST - ADD NEW USER
@@ -23,7 +23,7 @@ router.route("/add").post((req, res) => {
   newCaseStatus
     .save()
     .then(() => res.json("Username successfully created."))
-    .catch((e) => res.status(400).json("Error Message: ", e));
+    .catch((e) => res.status(400).json("Error Message: " + e));
 });
 
 module.exports = router;
