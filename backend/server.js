@@ -14,6 +14,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+//------------------------------------------------------------------------------
 //ROUTES - USERS
 
 //display all usernames
@@ -21,10 +22,21 @@ app.get("/users", async (req, res) => {
   //console.log("test");
   //res.send("test");
   try {
-    const users = await Users.find();
+    const users = await Users.find({});
     res.status(200).json(users);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
+  }
+});
+
+//display 1 user only
+app.get("/users/:username", async (req, res) => {
+  try {
+    const { username } = req.params;
+    const user = await Users.find({ username });
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -40,15 +52,27 @@ app.post("/users/create", async (req, res) => {
   }
 });
 
+//------------------------------------------------------------------------------
 //ROUTES - CASE STATUS
 
 //display all cases
 app.get("/cases", async (req, res) => {
   try {
-    const cases = await Cases.find();
+    const cases = await Cases.find({});
     res.status(200).json(cases);
   } catch (error) {
-    //console.log(error);
+    console.log(error);
+  }
+});
+
+//display 1 case only
+app.get("/cases/:caseid", async (req, res) => {
+  try {
+    const { caseid } = req.params;
+    const case1 = await Cases.find({ caseid });
+    res.status(200).json(case1);
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -63,6 +87,33 @@ app.post("/cases/add", async (req, res) => {
   }
 });
 
+//update case status based from objectID not case id
+app.put("/cases/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const case1 = await Cases.findByIdAndUpdate(id, req.body);
+
+    /*
+    note example:
+    request url: http://localhost:5000/cases/6466cac395e14d159704f1de
+    json: { "statuscode": 5 }
+    */
+
+    //throw if not found
+    if (!case1) {
+      res.status(404).json({
+        message: `Case ID: ${id} is not found. Please check again.`,
+      });
+    }
+    const updatedStatus = await Cases.findById(id);
+    res.status(200).json(updatedStatus);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//------------------------------------------------------------------------------
+
 //DB CONNECTION
 const uri = process.env.ATLAS_URI;
 mongoose
@@ -76,3 +127,5 @@ mongoose
   .catch((e) => {
     console.log(e);
   });
+
+//reference: https://www.youtube.com/watch?v=9OfL9H6AmhQ
