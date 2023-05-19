@@ -4,39 +4,12 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import EditStatus from "../components/EditStatus";
+import useFetch from "../hooks/useFetch";
 
 export default function CaseStatus() {
-  //temporary list
-  const caseList = [
-    {
-      caseid: "F-0000",
-      statuscode: 1,
-    },
-    {
-      caseid: "F-1111",
-      statuscode: 12,
-    },
-    {
-      caseid: "F-2222",
-      statuscode: 5,
-    },
-    {
-      caseid: "F-2323",
-      statuscode: 6,
-    },
-    {
-      caseid: "F-3333",
-      statuscode: 7,
-    },
-    {
-      caseid: "F-4444",
-      statuscode: 9,
-    },
-    {
-      caseid: "F-5555",
-      statuscode: 11,
-    },
-  ];
+  //FETCH ALL CASES
+  const [cases, setCases] = useFetch("http://localhost:5000/cases");
+  //if (cases) console.log(cases);
 
   function setStatusColor(statuscode) {
     if (!statuscode) return "";
@@ -76,8 +49,8 @@ export default function CaseStatus() {
             </tr>
           </thead>
           <tbody>
-            {caseList &&
-              caseList.map((x) => {
+            {cases &&
+              cases.map((x) => {
                 return (
                   <tr key={x.caseid}>
                     <td>{x.caseid}</td>
