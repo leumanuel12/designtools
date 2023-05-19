@@ -5,11 +5,17 @@ import {
 } from "@heroicons/react/24/outline";
 import EditStatus from "../components/EditStatus";
 import useFetch from "../hooks/useFetch";
+import { useEffect } from "react";
 
 export default function CaseStatus() {
   //FETCH ALL CASES
-  const [cases, setCases] = useFetch("http://localhost:5000/cases");
+
   //if (cases) console.log(cases);
+  const [cases, setCases] = useFetch("http://localhost:5000/cases");
+
+  useEffect(() => {
+    //TODO: once submitted case, update UI list...
+  }, []);
 
   function setStatusColor(statuscode) {
     if (!statuscode) return "";
@@ -40,6 +46,7 @@ export default function CaseStatus() {
   return (
     <div className="lg:grid lg:grid-cols-2 my-5 font-medium">
       <div className="col-span-1 mb-4">
+        <div>This tool is still under development...</div>
         <table className="table-fixed casetable">
           <thead>
             <tr>

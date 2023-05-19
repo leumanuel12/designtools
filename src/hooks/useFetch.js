@@ -19,7 +19,7 @@ export default function useFetch(url) {
         console.log(e);
         setErrorStatus(e);
       });
-  }, [data]);
+  }, []);
 
   return [data, errorStatus];
 }
