@@ -38,10 +38,6 @@ export default function CaseStatus() {
     },
   ];
 
-  //mongodb+srv://cantiveros12:u5qwAI5tioNxbU19@casestatus.2cyqjhs.mongodb.net/
-  //https://www.mongodb.com/languages/mern-stack-tutorial
-  //https://www.youtube.com/watch?v=7CqJlxBYj-M
-
   function setStatusColor(statuscode) {
     if (!statuscode) return "";
     if (statuscode === 5) return " bg-yellow-300 ";
