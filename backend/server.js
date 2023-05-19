@@ -112,6 +112,29 @@ app.put("/cases/:id", async (req, res) => {
   }
 });
 
+//delete case by objectid
+app.delete("/cases/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const case1 = await Cases.findByIdAndDelete(id);
+
+    //throw if not found
+    if (!case1) {
+      res.status(404).json({
+        message: `Case ID: ${id} is not found. Please check again.`,
+      });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: `Case ID: ${id} has been deleted in the tracker list.`,
+      });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 //------------------------------------------------------------------------------
 
 //DB CONNECTION
