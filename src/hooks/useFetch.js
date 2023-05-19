@@ -5,7 +5,14 @@ export default function useFetch(url) {
   const [errorStatus, setErrorStatus] = useState();
 
   useEffect(() => {
-    fetch(url)
+    fetch(url, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Request-Headers": "*",
+        "api-key": process.env.API_KEY,
+      },
+    })
       .then((response) => {
         if (!response.ok) {
           throw response.status;

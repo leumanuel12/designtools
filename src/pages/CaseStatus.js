@@ -11,7 +11,10 @@ export default function CaseStatus() {
   //FETCH ALL CASES
 
   //if (cases) console.log(cases);
-  const [cases, setCases] = useFetch("http://localhost:5000/cases");
+  //FIXME: Need to figure out how to consume API data...
+  const [cases, setCases] = useFetch(
+    "https://us-east-1.aws.data.mongodb-api.com/app/data-uyyyi/endpoint/data/v1/action/findOne"
+  );
 
   useEffect(() => {
     //TODO: once submitted case, update UI list...
